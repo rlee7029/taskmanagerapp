@@ -14,6 +14,10 @@ TaskManagerApp also integrates with the Stripe payment platform for accepting ch
 ![](./images/register.PNG)
 ![](./images/updateTask.PNG)
 
+## To run the app
+1. Go to .env on server file and run node index.js
+2. after node index.js has been connected with the database, go to .env file on client and run npm start. Use the http link to go to the page. 
+
 
 ## Technologies Used
 
