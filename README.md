@@ -56,3 +56,6 @@ The TaskManagerApp project includes the following features:
 10. Integration with Stripe: The application integrates with the Stripe payment platform, enabling users to make charitable donations.
 11. Protected API Key Information: Sensitive API key information is securely stored on the server to protect it from unauthorized access.
 
+## Deploy 
+You can visit the app by using this link: https://taskmanagerapp1-79875ae07008.herokuapp.com/
+ https://rlee7029.github.io/taskmanagerapp/
