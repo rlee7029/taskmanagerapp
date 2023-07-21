@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const crypto = require('crypto');
 const cors = require('cors');
+const path = require('path')
 
 require('dotenv').config();
 
@@ -45,12 +46,22 @@ const server = new ApolloServer({
     }
   },
 });
+// Serve static files from the 'build' folder
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Your other Express routes go here
 
 app.use(cors());
 app.use((req, res, next) => {
   res.set('Content-Security-Policy', `script-src 'self' 'nonce-${nonce}'`);
   next();
 });
+
+// Catch-all route for React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
 
 // Define route for creating a PaymentIntent
 app.post('/api/create-checkout-session', async (req, res) => {
@@ -87,7 +98,7 @@ async function startApolloServer() {
 }
 
 startApolloServer().then(() => {
-  const PORT = process.env.PORT || 4000;
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
     console.log(`GraphQL endpoint: ${server.graphqlPath}`);
