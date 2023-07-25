@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
@@ -13,8 +14,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const crypto = require('crypto');
 const cors = require('cors');
 const path = require('path')
-
-require('dotenv').config();
 
 connectDB();
 
@@ -47,7 +46,7 @@ const server = new ApolloServer({
   },
 });
 // Serve static files from the 'build' folder
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Your other Express routes go here
 
@@ -58,10 +57,9 @@ app.use((req, res, next) => {
 });
 
 // Catch-all route for React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
-
 
 // Define route for creating a PaymentIntent
 app.post('/api/create-checkout-session', async (req, res) => {
